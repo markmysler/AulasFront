@@ -1,5 +1,5 @@
 <template>
-
+<h1>Detelle reserva</h1>
 </template>
 <script>
 export default {

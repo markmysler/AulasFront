@@ -1,5 +1,5 @@
 <template>
-
+<h1>Aula detalle</h1>
 </template>
 <script>
 export default {
