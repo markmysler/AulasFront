@@ -1,10 +1,23 @@
 <template>
-<div class="login-wrapper">
-    <form @submit.prevent="submitForm">
-        <input type="text" placeholder="Nombre de usuario" v-model="username">
-        <input type="password" placeholder="Contraseña" v-model="password">
-        <button>Enviar</button>
-    </form>
+<div class="loginWrapper columnItemsCenter">
+    <h2>Iniciar Sesión</h2>
+    <v-form @submit.prevent="submitForm" class="columnItemsCenter w-75">
+        <v-text-field class="w-50" placeholder="Nombre de usuario"  v-model="username" />
+        <v-text-field 
+            class="w-50" 
+            placeholder="Contraseña"  
+            v-model="password"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show1 ? 'text' : 'password'"
+            @click:append="show1 = !show1"
+        />
+        <div v-if="errors.length">
+            <p v-for="error in errors" :key="error">
+                {{ error }}
+            </p>
+        </div>
+        <v-btn type='submit'>Enviar</v-btn>
+    </v-form>
 </div>
 </template>
 <script>
@@ -14,11 +27,14 @@ export default {
     data(){
         return {
             username: '',
-            password: ''
+            password: '',
+            show1: false,
+            errors: [],
         }
     },
     methods:{
         async submitForm(){
+            this.errors = [];
             axios.defaults.headers.common['Authorization'] = ''
             localStorage.removeItem('token')
 
@@ -38,7 +54,7 @@ export default {
 
                     localStorage.setItem('token', token)
 
-                    const toPath = this.$route.query.to || '/home'
+                    const toPath = this.$route.query.to || '/inicio'
 
                     this.$router.push(toPath)
                 })
@@ -59,3 +75,19 @@ export default {
     }
 }
 </script>
+
+<style scoped lang="scss">
+.columnItemsCenter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.loginWrapper{
+    margin: 15vw;
+}
+input{
+    border: 1px solid rgba(0,0,0,0.3);
+    border-radius: 10px;
+    padding: 0.5vw 1vw;
+}
+</style>
