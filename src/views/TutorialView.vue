@@ -1,5 +1,5 @@
 <template>
-<h1>TUTORIAL</h1>
+
 </template>
 <script>
 export default {
