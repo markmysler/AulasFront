@@ -2,15 +2,16 @@
   <v-app-bar elevation="3" class="bg-lightSilver">
       <h1 class="text-black">Aulas</h1>
       <div v-if="!$store.state.isAuthenticated">
-        <v-btn elevation="2" class="bg-white">
-          <router-link to="/iniciar-sesion" class="text-black">Iniciar sesión</router-link>
+        <v-btn elevation="2" class="bg-white text-black" @click="$router.push('/iniciar-sesion')">
+          Iniciar sesión
         </v-btn>
-        <v-btn elevation="2" class="bg-lightBrick">
-          <router-link to="/registrarse" class="text-white">Registrarse</router-link>
+        <v-btn elevation="2" class="bg-lightBrick text-white" @click="$router.push('/registrarse')">
+          Registrarse
         </v-btn>
       </div>
       <div v-else>
         <v-btn @click="logout" elevation="2" class="bg-darkBrick text-white">Cerrar sesión</v-btn>
+        <v-btn @click="$router.push('/reservar')" elevation="2" class="bg-darkBrick text-white">Reservar aula</v-btn>
       </div>
     </v-app-bar>
 </template>

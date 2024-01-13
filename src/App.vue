@@ -1,7 +1,9 @@
 <template>
   <v-app class="bg-white h-full">
     <HeaderComponent />
-    <router-view />
+    <div class="routerViewWrapper">
+      <router-view />
+    </div>
   </v-app>
 </template>
 
@@ -23,7 +25,16 @@ export default {
   padding: 0;
   list-style: none;
 }
+.columnItemsCenter{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.routerViewWrapper{
+  margin-top: 75px;
+}
 h2{
+  text-align: center;
   font-size: 2rem;
 }
 </style>

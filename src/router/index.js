@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import store from '../store'
 import HomeView from '../views/HomeView.vue'
 import AulaView from '../views/AulaView.vue'
 import LogInView from '../views/LogInView.vue'
@@ -13,7 +14,10 @@ const routes = [
   {
     path: '/inicio',
     name: 'Inicio',
-    component: HomeView
+    component: HomeView,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/iniciar-sesion',
@@ -28,17 +32,26 @@ const routes = [
   {
     path: '/mis-reservas',
     name: 'MisReservas',
-    component: MyReservationsView
+    component: MyReservationsView,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/reservar',
     name: 'Reservar',
-    component: ReservationView
+    component: ReservationView,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/perfil',
     name: 'Perfil',
-    component: ProfileView
+    component: ProfileView,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/',
@@ -48,18 +61,30 @@ const routes = [
   {
     path: '/aula/:aula_id/',
     name: 'AulaDetalle',
-    component: AulaView
+    component: AulaView,
+    meta: {
+      requireLogin: true
+    }
   },
   {
     path: '/mis-reservas/:reserva_id/',
     name: 'ReservaDetalle',
-    component: ReservationDetailView
+    component: ReservationDetailView,
+    meta: {
+      requireLogin: true
+    }
   },
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to,from)=>{
+  if (to.meta?.requireLogin && !store.state.isAuthenticated) {
+    return 'iniciar-sesion'
+  }
 })
 
 export default router

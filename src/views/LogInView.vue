@@ -1,10 +1,10 @@
 <template>
 <div class="loginWrapper columnItemsCenter">
     <h2>Iniciar Sesión</h2>
-    <v-form @submit.prevent="submitForm" class="columnItemsCenter w-75">
-        <v-text-field class="w-50" placeholder="Nombre de usuario"  v-model="username" />
+    <v-form @submit.prevent="submitForm" class="columnItemsCenter w-50">
+        <v-text-field class="w-100" placeholder="Nombre de usuario"  v-model="username" />
         <v-text-field 
-            class="w-50" 
+            class="w-100" 
             placeholder="Contraseña"  
             v-model="password"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -16,7 +16,7 @@
                 {{ error }}
             </p>
         </div>
-        <v-btn type='submit'>Enviar</v-btn>
+        <v-btn type='submit'>Iniciar sesión</v-btn>
     </v-form>
 </div>
 </template>
@@ -77,11 +77,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.columnItemsCenter{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 .loginWrapper{
     margin: 15vw;
 }
@@ -89,5 +84,8 @@ input{
     border: 1px solid rgba(0,0,0,0.3);
     border-radius: 10px;
     padding: 0.5vw 1vw;
+}
+.v-input__append{
+    margin-inline: 0;
 }
 </style>

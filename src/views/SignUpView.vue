@@ -19,7 +19,7 @@
                 :type="show2 ? 'text' : 'password'"
                 @click:append="show2 = !show2"
             />
-            <v-btn type='submit'>Enviar</v-btn>
+            <v-btn type='submit'>Crear cuenta</v-btn>
         </v-form>
     </div>
 </template>
@@ -86,11 +86,6 @@ export default {
 </script>
 
 <style scoped>
-.columnItemsCenter{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
 .registerWrapper{
     margin: 15vw;
 }

@@ -32,6 +32,7 @@ const vuetify = createVuetify({
 })
 
 axios.defaults.baseURL= 'http://149.50.135.56:8080'
+// axios.defaults.baseURL= 'http://localhost:8000'
 
 createApp(App)
 .use(store)
