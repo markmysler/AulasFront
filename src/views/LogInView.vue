@@ -77,9 +77,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.loginWrapper{
-    margin: 15vw;
-}
 input{
     border: 1px solid rgba(0,0,0,0.3);
     border-radius: 10px;

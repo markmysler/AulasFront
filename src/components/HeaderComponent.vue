@@ -1,25 +1,50 @@
 <template>
   <v-app-bar elevation="3" class="bg-lightSilver">
-      <h1 class="text-black">Aulas</h1>
-      <div v-if="!$store.state.isAuthenticated">
-        <v-btn elevation="2" class="bg-white text-black" @click="$router.push('/iniciar-sesion')">
-          Iniciar sesión
-        </v-btn>
-        <v-btn elevation="2" class="bg-lightBrick text-white" @click="$router.push('/registrarse')">
-          Registrarse
-        </v-btn>
-      </div>
-      <div v-else>
-        <v-btn @click="logout" elevation="2" class="bg-darkBrick text-white">Cerrar sesión</v-btn>
-        <v-btn @click="$router.push('/reservar')" elevation="2" class="bg-darkBrick text-white">Reservar aula</v-btn>
-      </div>
-    </v-app-bar>
+    <v-app-bar-nav-icon icon="mdi-menu" @click="showMenu = !showMenu"></v-app-bar-nav-icon>
+    <v-toolbar-title class="text-black">Aulas</v-toolbar-title>
+  </v-app-bar>
+  <v-navigation-drawer v-model="showMenu" app>
+    <v-list tag="ul">
+      <li v-for="item in menu" :key="item.titulo">
+        <v-list-item :to="item.path">
+          <v-list-item-action>
+            <v-icon color="primary">mdi-{{ item.icono }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title> {{ item.titulo }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </li>
+    </v-list>
+  </v-navigation-drawer>
+  <!-- <div v-if="$store.state.isAuthenticated">
+      <v-btn elevation="2" class="bg-white text-black" @click="$router.push('/iniciar-sesion')">
+        Iniciar sesión
+      </v-btn>
+      <v-btn elevation="2" class="bg-lightBrick text-white" @click="$router.push('/registrarse')">
+        Registrarse
+      </v-btn>
+    </div> -->
 </template>
+
+
 
 <script>
 import axios from 'axios';
 export default {
   name: 'HeaderComponent',
+  data(){
+    return{
+      showMenu: false,
+      menu: [
+        {
+        titulo: 'IniciarSesion',
+        icono: 'home',
+        path: '/iniciar-sesion',
+      },
+      ]
+    }
+  },
   methods:{
     logout(){
       axios.defaults.headers.common['Authorization'] = '';

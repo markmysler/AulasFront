@@ -1,11 +1,12 @@
 <template>
-  <div class="home">
-    <h2>Ver Aulas Disponibles Ahora</h2>
-    <div class="columnItemsCenter aulasWrapper">
-      <div class="aula" v-for="aula in aulas" :key="aula.id">
-        <p>
-          {{ aula.name }}
-        </p>
+  <div class="columnItemsCenter">
+    <h2>Aulas Disponibles</h2>
+    <v-btn @click="$router.push('/reservar')" elevation="2" class="bg-darkBrick text-white">Reservar aula</v-btn>
+    <div class="aulasWrapper">
+      <div class="aula columnItemsCenter" v-for="aula in aulas" :key="aula.id">
+        <p> {{ aula.name }} </p>
+        <p> {{ aula.max_capacity }} </p>
+        <p> {{ aula.has_negatoscope }} </p>
       </div>
     </div>
   </div>
@@ -45,9 +46,23 @@ export default {
 
 <style scoped>
 .aulasWrapper{
+  width: 85%;
   gap: 2vw;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 3vw;
 }
 .aula{
+  width: 40%;
   border: 1px solid black;
+  padding: 2vw;
+}
+.aulaAvailable{
+  border: 1px solid blue;
+}
+.aulaNotAvailable{
+  background-color: red;
+  color: white;
 }
 </style>

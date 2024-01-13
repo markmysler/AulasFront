@@ -36,5 +36,6 @@ export default {
 h2{
   text-align: center;
   font-size: 2rem;
+  margin: 2vw 0;
 }
 </style>
