@@ -1,7 +1,7 @@
 <template>
   <v-app class="bg-white h-full">
     <HeaderComponent />
-    <div class="routerViewWrapper">
+    <div class="routerViewWrapper columnItemsCenter mt-16">
       <router-view />
     </div>
   </v-app>
@@ -30,12 +30,10 @@ export default {
   flex-direction: column;
   align-items: center;
 }
-.routerViewWrapper{
-  margin-top: 75px;
-}
 h2{
   text-align: center;
-  font-size: 2rem;
-  margin: 2vw 0;
+  font-size: 1.7rem;
+  font-weight: 500;
+  margin: 5vw 0 2vw 0;
 }
 </style>

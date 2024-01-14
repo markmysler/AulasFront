@@ -1,30 +1,40 @@
 <template>
   <v-app-bar elevation="3" class="bg-lightSilver">
     <v-app-bar-nav-icon icon="mdi-menu" @click="showMenu = !showMenu"></v-app-bar-nav-icon>
-    <v-toolbar-title class="text-black">Aulas</v-toolbar-title>
+    <v-toolbar-title class="text-black text-h4">Aulas</v-toolbar-title>
   </v-app-bar>
   <v-navigation-drawer v-model="showMenu" app>
-    <v-list tag="ul">
-      <li v-for="item in menu" :key="item.titulo">
+    <v-list tag="ul" v-if="!$store.state.isAuthenticated">
+      <li v-for="item in menuRegular" :key="item.title">
         <v-list-item :to="item.path">
           <v-list-item-action>
-            <v-icon color="primary">mdi-{{ item.icono }}</v-icon>
+            <v-icon color="lightBrick" :icon="item.icon"></v-icon>
           </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title> {{ item.titulo }}</v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title> {{ item.title }}</v-list-item-title>
+        </v-list-item>
+      </li>
+    </v-list>
+    <v-list tag="ul" v-else class="menuRequiredLogin">
+      <div>
+        <li v-for="item in menuRequiredLogin" :key="item.title">
+          <v-list-item :to="item.path">
+            <v-list-item-action>
+              <v-icon color="lightBrick" :icon="item.icon"></v-icon>
+            </v-list-item-action>
+            <v-list-item-title> {{ item.title }}</v-list-item-title>
+          </v-list-item>
+        </li>
+      </div>
+      <li class="logout">
+        <v-list-item @click="this.logout()">
+          <v-list-item-action>
+            <v-icon color="darkBrick" icon="mdi-power"></v-icon>
+          </v-list-item-action>
+          <v-list-item-title>Cerrar sesión</v-list-item-title>
         </v-list-item>
       </li>
     </v-list>
   </v-navigation-drawer>
-  <!-- <div v-if="$store.state.isAuthenticated">
-      <v-btn elevation="2" class="bg-white text-black" @click="$router.push('/iniciar-sesion')">
-        Iniciar sesión
-      </v-btn>
-      <v-btn elevation="2" class="bg-lightBrick text-white" @click="$router.push('/registrarse')">
-        Registrarse
-      </v-btn>
-    </div> -->
 </template>
 
 
@@ -36,12 +46,49 @@ export default {
   data(){
     return{
       showMenu: false,
-      menu: [
+      menuRegular: [
         {
-        titulo: 'IniciarSesion',
-        icono: 'home',
-        path: '/iniciar-sesion',
-      },
+          path: '/iniciar-sesion',
+          title: 'Iniciar sesión',
+          icon: 'mdi-account-circle'
+        },
+        {
+          path: '/registrarse',
+          title: 'Registrarse',
+          icon: 'mdi-account-plus'
+        },
+        {
+          path: '/',
+          title: 'Tutorial',
+          icon: 'mdi-school'
+        },
+      ],
+      menuRequiredLogin: [
+        {
+          path: '/inicio',
+          title: 'Inicio',
+          icon: 'mdi-home'
+        },
+        {
+          path: '/mis-reservas',
+          title: 'Mis Reservas',
+          icon: 'mdi-calendar-multiselect'
+        },
+        {
+          path: '/reservar',
+          title: 'Reservar',
+          icon: 'mdi-calendar-plus'
+        },
+        {
+          path: '/',
+          title: 'Tutorial',
+          icon: 'mdi-school'
+        },
+        {
+          path: '/perfil',
+          title: 'Perfil',
+          icon: 'mdi-account'
+        },
       ]
     }
   },
@@ -69,12 +116,24 @@ export default {
     gap: 2vw;
   }
 }
-h1{
-  font-size: 3rem;
+.title{
+  font-size: 5rem;
   margin-left: 5vw;
 }
 a{
   text-decoration: none;
+}
+
+.menuRequiredLogin{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.v-list-item__content{
+  display: flex;
+  gap: 1vh;
 }
 
 </style>
