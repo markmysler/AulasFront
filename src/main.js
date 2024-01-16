@@ -31,7 +31,11 @@ const vuetify = createVuetify({
   },
 })
 
+/* API Despliegue */
 axios.defaults.baseURL= 'http://149.50.135.56:8080'
+
+/* API Local */
+// axios.defaults.baseURL= 'http://172.22.112.1:8000'
 // axios.defaults.baseURL= 'http://localhost:8000'
 
 createApp(App)

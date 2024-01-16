@@ -1,7 +1,7 @@
 <template>
   <div class="columnItemsCenter">
     <h2>Aulas Disponibles</h2>
-    <v-btn @click="$router.push('/completar-perfil')" elevation="2" class="bg-darkBrick text-white">Reservar aula</v-btn>
+    <v-btn @click="$router.push('/reservar')" elevation="2" class="bg-darkBrick text-white">Reservar aula</v-btn>
     <div class="aulasWrapper">
       <div class="aula columnItemsCenter" v-for="aula in aulas" :key="aula.id">
         <p> {{ aula.name }} </p>
