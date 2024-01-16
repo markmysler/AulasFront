@@ -1,7 +1,7 @@
 <template>
 <div class="loginWrapper columnItemsCenter">
     <h2>Iniciar Sesión</h2>
-    <v-form @submit.prevent="submitForm" class="columnItemsCenter w-50">
+    <v-form @submit.prevent="submitForm" class="columnItemsCenter">
         <v-text-field class="w-100" placeholder="Nombre de usuario"  v-model="username" />
         <v-text-field 
             class="w-100" 
