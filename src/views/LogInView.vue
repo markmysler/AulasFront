@@ -1,10 +1,10 @@
 <template>
-<div class="loginWrapper columnItemsCenter">
+<div class="columnItemsCenter w-100 py-5 ga-5">
     <h2>Iniciar Sesión</h2>
-    <v-form @submit.prevent="submitForm" class="columnItemsCenter">
-        <v-text-field class="w-100" placeholder="Nombre de usuario"  v-model="username" />
+    <v-form @submit.prevent="submitForm" class="columnItemsCenter w-100">
+        <v-text-field class="w-75" placeholder="Nombre de usuario"  v-model="username" />
         <v-text-field 
-            class="w-100" 
+            class="w-75" 
             placeholder="Contraseña"  
             v-model="password"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -16,10 +16,15 @@
                 {{ error }}
             </p>
         </div>
-        <v-btn type='submit'>Iniciar sesión</v-btn>
+        <v-btn variant="elevated" color="#BC4A3C" size="large" class="mt-6 px-10" type='submit'>Ingresar</v-btn>
+        <div class="w-100 d-flex flex-row justify-center ga-2 mt-5">
+            <p class="text-blue-grey-lighten-1">¿No tienes una cuenta?</p>
+            <router-link class="text-darkBrick" to="/registrarse">Registrate</router-link>
+        </div>
     </v-form>
 </div>
 </template>
+
 <script>
 import axios from 'axios'
 export default {

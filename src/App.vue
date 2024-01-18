@@ -25,6 +25,14 @@ export default {
   padding: 0;
   list-style: none;
 }
+body{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+button{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 .columnItemsCenter{
   display: flex;
   flex-direction: column;

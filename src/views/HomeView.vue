@@ -39,6 +39,9 @@ export default {
   },
   mounted(){
     document.title = 'Inicio'
+    if (!this.$store.state.hasCompleteProfile) {
+      this.$router.push('/completar-perfil')
+    }
     this.getAulas()
   }
 }
