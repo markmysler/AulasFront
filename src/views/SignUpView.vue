@@ -1,10 +1,10 @@
 <template>
-    <div class="registerWrapper columnItemsCenter">
+    <div class="columnItemsCenter w-100 py-5 ga-5">
         <h2>Registrarse</h2>
-        <v-form @submit.prevent="submitForm" class="columnItemsCenter w-75">
-            <v-text-field class="w-50" placeholder="Nombre de usuario"  v-model="username" />
+        <v-form @submit.prevent="submitForm" class="columnItemsCenter w-100">
+            <v-text-field class="w-75" placeholder="Nombre de usuario"  v-model="username" />
             <v-text-field 
-                class="w-50" 
+                class="w-75" 
                 placeholder="Contraseña"  
                 v-model="password"
                 :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -12,14 +12,18 @@
                 @click:append="show1 = !show1"
             />
             <v-text-field 
-                class="w-50" 
+                class="w-75" 
                 placeholder="Repetir Contraseña"  
                 v-model="password2"
                 :append-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="show2 ? 'text' : 'password'"
                 @click:append="show2 = !show2"
             />
-            <v-btn type='submit'>Crear cuenta</v-btn>
+            <v-btn variant="elevated" color="#BC4A3C" size="large" class="mt-6 px-10" type='submit'>Crear cuenta</v-btn>
+            <div class="w-100 d-flex flex-row justify-center ga-2 mt-5">
+                <p class="text-blue-grey-lighten-1">¿Ya tienes una cuenta?</p>
+            <router-link class="text-darkBrick" to="/iniciar-sesion">Inicia sesión</router-link>
+        </div>
         </v-form>
     </div>
 </template>
@@ -86,7 +90,4 @@ export default {
 </script>
 
 <style scoped>
-.registerWrapper{
-    margin: 15vw;
-}
 </style>

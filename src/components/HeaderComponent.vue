@@ -116,19 +116,11 @@ export default {
     gap: 2vw;
   }
 }
-.title{
-  font-size: 5rem;
-  margin-left: 5vw;
+.v-toolbar-title__placeholder{
+  font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 a{
   text-decoration: none;
-}
-
-.menuRequiredLogin{
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .v-list-item__content{

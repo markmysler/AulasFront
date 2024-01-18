@@ -22,9 +22,9 @@ const vuetify = createVuetify({
           darkBrick: '#BC4A3C',
           lightBrick: '#E76C63',
           white: '#FFFEFC',
-          black: '040406',
+          black: '#040406',
           darkSilver: '#C0C0C0',
-          lightSilver: 'D9D9D9'
+          lightSilver: '#D9D9D9'
         }
       },
     },
