@@ -16,10 +16,10 @@
                 {{ error }}
             </p>
         </div>
-        <v-btn variant="elevated" color="#BC4A3C" size="large" class="mt-6 px-10" type='submit'>Ingresar</v-btn>
+        <v-btn variant="elevated" color="blue" size="large" class="mt-6 px-10" type='submit'>Ingresar</v-btn>
         <div class="w-100 d-flex flex-row justify-center ga-2 mt-5">
             <p class="text-blue-grey-lighten-1">¿No tienes una cuenta?</p>
-            <router-link class="text-darkBrick" to="/registrarse">Registrate</router-link>
+            <router-link class="text-blue" to="/registrarse">Registrate</router-link>
         </div>
     </v-form>
 </div>

@@ -19,10 +19,10 @@
                 :type="show2 ? 'text' : 'password'"
                 @click:append="show2 = !show2"
             />
-            <v-btn variant="elevated" color="#BC4A3C" size="large" class="mt-6 px-10" type='submit'>Crear cuenta</v-btn>
+            <v-btn variant="elevated" color="blue" size="large" class="mt-6 px-10" type='submit'>Crear cuenta</v-btn>
             <div class="w-100 d-flex flex-row justify-center ga-2 mt-5">
                 <p class="text-blue-grey-lighten-1">¿Ya tienes una cuenta?</p>
-            <router-link class="text-darkBrick" to="/iniciar-sesion">Inicia sesión</router-link>
+            <router-link class="text-blue" to="/iniciar-sesion">Inicia sesión</router-link>
         </div>
         </v-form>
     </div>

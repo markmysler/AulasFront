@@ -19,8 +19,8 @@ const vuetify = createVuetify({
       light: {
         dark: false,
         colors: {
-          darkBrick: '#BC4A3C',
-          lightBrick: '#E76C63',
+          blue: '#373ae6',
+          lightBlue: '#0cb8f1',
           white: '#FFFEFC',
           black: '#040406',
           darkSilver: '#C0C0C0',
