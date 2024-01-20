@@ -8,7 +8,7 @@
       <li v-for="item in menuRegular" :key="item.title">
         <v-list-item :to="item.path">
           <v-list-item-action>
-            <v-icon color="lightBrick" :icon="item.icon"></v-icon>
+            <v-icon color="blue" :icon="item.icon"></v-icon>
           </v-list-item-action>
           <v-list-item-title> {{ item.title }}</v-list-item-title>
         </v-list-item>
@@ -19,7 +19,7 @@
         <li v-for="item in menuRequiredLogin" :key="item.title">
           <v-list-item :to="item.path">
             <v-list-item-action>
-              <v-icon color="lightBrick" :icon="item.icon"></v-icon>
+              <v-icon color="blue" :icon="item.icon"></v-icon>
             </v-list-item-action>
             <v-list-item-title> {{ item.title }}</v-list-item-title>
           </v-list-item>
@@ -28,7 +28,7 @@
       <li class="logout">
         <v-list-item @click="this.logout()">
           <v-list-item-action>
-            <v-icon color="darkBrick" icon="mdi-power"></v-icon>
+            <v-icon color="blue" icon="mdi-power"></v-icon>
           </v-list-item-action>
           <v-list-item-title>Cerrar sesión</v-list-item-title>
         </v-list-item>

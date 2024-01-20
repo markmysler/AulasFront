@@ -17,7 +17,7 @@
         </v-select>
       <v-btn
         variant="elevated"
-        color="#BC4A3C"
+        color="blue"
         size="large"
         class="mt-6 px-10"
         type="submit"
