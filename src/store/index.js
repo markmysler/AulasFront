@@ -10,7 +10,8 @@ export default createStore({
       username: '',
       email: '',
       id: ''
-    }
+    },
+    aulas:[]
   },
   getters: {
   },
