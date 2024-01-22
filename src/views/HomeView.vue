@@ -25,7 +25,7 @@ export default {
   methods:{
     async getAulas(){
       await axios
-      .get('/api/v1/get-aulas/')
+      .get('/api/v1/aulas/')
       .then(response => {
         this.aulas = response.data;
       })
@@ -39,9 +39,6 @@ export default {
   },
   mounted(){
     document.title = 'Inicio'
-    if (!this.$store.state.hasCompleteProfile) {
-      this.$router.push('/completar-perfil')
-    }
     this.getAulas()
   }
 }

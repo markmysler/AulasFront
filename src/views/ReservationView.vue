@@ -36,85 +36,39 @@
                 </v-btn>
             </v-btn-toggle>
         </div>
-        <v-btn @click="movePage('evento')">Continuar</v-btn>
+        <v-btn class="bg-blue" :disabled="reservationData.aula_capacity <= 0" @click="movePage('datesFrequency')">Continuar</v-btn>
     </div>
-    <!-- ¿Qué tipo de Evento es? -->
-    <div class="w-75 columnItemsCenter ga-3" v-if="page === 'evento'">
+    <!-- Fecha Inicio - Frecuencia - Fecha Fin -->
+    <div class="w-75 columnItemsCenter ga-3" v-if="page === 'datesFrequency'">
         <v-btn variant="text" prepend-icon="mdi-chevron-left" @click="movePage('')">
             Página anterior
         </v-btn>
-        <div class="columnItemsCenter ga-3">
-            <p>¿Qué tipo de Evento es?</p>
-            <v-btn-toggle variant="outlined" v-model="reservationData.type" mandatory>
-                <v-btn :value="'regular'">
-                    Evento regular
-                </v-btn>
-                <v-btn :value="'onetime'">
-                    Evento de una vez
-                </v-btn>
-            </v-btn-toggle>
-        </div>
-        <!-- Evento Regular -->
-        <div class="columnItemsCenter ga-3" v-if="reservationData.type === 'regular'">
-            <p>Días de la Semana</p>
-            <v-btn-toggle variant="outlined" v-model="daysObject" mandatory multiple>
-                <v-btn :value="0">
-                    Lunes
-                </v-btn>
-                <v-btn :value="1">
-                    Martes
-                </v-btn>
-                <v-btn :value="2">
-                    Miércoles
-                </v-btn>
-                <v-btn :value="3">
-                    Jueves
-                </v-btn>
-                <v-btn :value="4">
-                    Viernes
-                </v-btn>
-                <v-btn :value="5">
-                    Sábado
-                </v-btn>
-            </v-btn-toggle>
-            <v-btn @click="movePage('regularhours')">Continuar</v-btn>
-        </div>
-        <!-- Horarios por cada dia de la semana -->
-        <div class="columnItemsCenter ga-3" v-if="page === 'regularhours'">
-            <v-btn variant="text" prepend-icon="mdi-chevron-left" @click="movePage('evento')">
-                Página anterior
-            </v-btn>
-            <p>Escribir rango de Horarios aclarando Sabado</p>
-            <div v-for="(item, index) in selectedDaysArray" :key="index" class="columnItemsCenter ga-3">
-                <v-text-field
-                    label="Horario de Inicio"
-                    type="time"
-                    suffix="GMT-3"
-                    v-model="reservationData.times[index]"
-                ></v-text-field>
-                <v-text-field
-                    label="Horario de Finalización"
-                    type="time"
-                    suffix="GMT-3"
-                    v-model="reservationData.end_time[index]"
-                ></v-text-field>
-            </div>
-        </div>
-        <!-- Evento One Time -->
-        <div class="w-75 columnItemsCenter ga-3" v-if="reservationData.type === 'onetime'">
+        <div class="w-75 columnItemsCenter ga-3">
             <v-date-picker 
                 v-model="reservationData.start_date"
                 show-adjacent-months
                 :title="'Fecha de incio'"
                 :header="'Seleccione un día'"
+                :min="today"
             ></v-date-picker>
+            <v-select
+            class="w-75"
+            label="Frecuencia"
+            :items="frequencies"
+            item-title="label"
+            item-value="value"
+            v-model="reservationData.frequency"
+            >
+            </v-select>
             <v-date-picker 
                 v-model="reservationData.end_date"
                 show-adjacent-months
                 :title="'Fecha de finalización'"
                 :header="'Seleccione un día'"
+                :min="tomorrow"
+                v-if="reservationData.frequency !== ''"
             ></v-date-picker>
-            <v-btn @click="movePage('')">Continuar</v-btn>
+            <v-btn :disabled="reservationData.start_date === null || (reservationData.frequency !== '' && reservationData.end_date === null)" class="bg-blue" @click="submitReservationData">Continuar</v-btn>
         </div>
     </div>
 </template>
@@ -125,41 +79,106 @@ export default {
     data(){
         return{
             page: '',
+            today: null,
             reservationData: {
                 aula_capacity: 0,
                 has_screen: false,
                 has_negatoscope: false,
-                type: '',
-                days: [],
-                start_time: null,
-                end_time: null,
                 start_date: null,
                 end_date: null,
-                has_frequency: false,
+                frequency: '',
+                times: [],
             },
-            daysObject: {},
+            frequencies: [
+                {
+                    label: 'No se repite',
+                    value: '',
+                },
+                {
+                    label: 'Diariamente',
+                    value: 'daily',
+                },
+                {
+                    label: 'Semanalmente',
+                    value: 'weekly',
+                },
+                {
+                    label: 'Mensualmente',
+                    value: 'monthly',
+                },
+            ]
         }
-    },
-    computed:{
-        selectedDaysArray() {
-            return Object.keys(this.daysObject).filter(day => this.daysObject[day]);
-        },
     },
     mounted(){
         document.title = 'Reservar un aula'
+        let date = new Date();
+
+        let month = '' + (date.getMonth() + 1),
+            day = '' + date.getDate(),
+            year = date.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        this.today = [year, month, day].join('-');
     },
     methods:{
         movePage(pagina){
             this.page = pagina
         },
         submitReservationData(){
-            this.reservationData.days = this.selectedDaysArray;
+            this.reservationData.start_date = this.formattedStart
+            if (this.reservationData.frequency === '') {
+                this.reservationData.end_date = this.formattedStart
+            }else{
+                this.reservationData.end_date = this.formattedEnd
+            }
             console.log(this.reservationData);
+
         },
+        
+    },
+    computed: {
+    formattedStart() {
+        if (!this.reservationData.start_date) return null;
+
+        const d = this.reservationData.start_date;
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+        return [year, month, day].join('-');
+    },
+    formattedEnd() {
+        if (!this.reservationData.end_date) return null;
+
+        const d = this.reservationData.end_date;
+        let month = '' + (d.getMonth() + 1);
+        let day = '' + d.getDate();
+        const year = d.getFullYear();
+
+        if (month.length < 2) 
+            month = '0' + month;
+        if (day.length < 2) 
+            day = '0' + day;
+
+        return [year, month, day].join('-');
+    },
+    tomorrow(){
+        let dateArr = this.formattedStart.split('-')
+        dateArr[2] = (parseInt(dateArr[2],10) + 1).toString()
+        return dateArr.join('-')
     }
+}
+
 }
 </script>
 
 <style scoped>
-
 </style>
