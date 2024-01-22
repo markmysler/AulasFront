@@ -3,7 +3,6 @@
     <div class="profiletInfo">
         <p>Nombre: {{ profile.name }} </p>
         <p>Email: {{ profile.email }} </p>
-        <p>Categoria: {{ profile.categoria }} </p>
     </div>
     <div>
         <button @click="editProfile" class="bg-blue pa-4 rounded-pill">Editar Perfil</button>
@@ -17,19 +16,25 @@ export default {
     data(){
         return{
             profile: {
-                name: 'Lio',
-                email: 'liobensignor@gmail.com',
-                categoria: 'UBA'
+                name: '',
+                email: '',
+                id: ''
             }
         }
     },
     methods:{
         editProfile(){
             console.log('Editar Perfil');
-        }
+        },
+        getUserData(){
+                this.profile.name = this.$store.state.user.username;
+                this.profile.email = this.$store.state.user.email;
+                this.profile.id = this.$store.state.user.id;
+            }
     },
     mounted(){
-        document.title = 'Perfil'
+        document.title = 'Perfil',
+        this.getUserData()
     }
 }
 </script>

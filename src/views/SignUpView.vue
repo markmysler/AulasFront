@@ -3,6 +3,7 @@
         <h2>Registrarse</h2>
         <v-form @submit.prevent="submitForm" class="columnItemsCenter w-100">
             <v-text-field class="w-75" placeholder="Nombre de usuario"  v-model="username" />
+            <v-text-field class="w-75" placeholder="Email"  v-model="email" type="email" />
             <v-text-field 
                 class="w-75" 
                 placeholder="Contraseña"  
@@ -34,6 +35,7 @@ export default {
     data(){
         return{
             username: '',
+            email: '',
             password: '',
             password2: '',
             show1: false,
@@ -47,6 +49,9 @@ export default {
             if (this.username === '') {
                 this.errors.push('Usuario Vacio')
             }
+            if (this.email === '') {
+                this.errors.push('Email Vacio')
+            }
             if (this.password === '') {
                 this.errors.push('Password Vacio')
             }
@@ -56,6 +61,7 @@ export default {
             if (!this.errors.length) {
                 const formData = {
                     username: this.username,
+                    email: this.email,
                     password: this.password,
                 }
                 axios

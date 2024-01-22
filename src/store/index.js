@@ -1,12 +1,16 @@
 import { createStore } from 'vuex'
+import axios from 'axios';
 
 export default createStore({
   state: {
-    helloWorld:'hola',
     isAuthenticated: false,
     token: '',
     isLoading: false,
-    hasCompleteProfile: false,
+    user: {
+      username: '',
+      email: '',
+      id: ''
+    }
   },
   getters: {
   },
@@ -23,9 +27,18 @@ export default createStore({
     setIsLoading(state, status){
       state.isLoading = status;
     },
-    setToken(state, token){
+    async setToken(state, token){
       state.token = token
       state.isAuthenticated = true
+
+      await axios
+              .get(`api/v1/user/${state.token}`)
+              .then(response=>{
+                  const data = response.data;
+                  state.user.id = data.id;
+                  state.user.username = data.username;
+                  state.user.email = data.email;
+              })
     },
     removeToken(state){
       state.token = ''

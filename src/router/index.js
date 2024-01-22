@@ -7,7 +7,6 @@ import MyReservationsView from '../views/MyReservationsView.vue'
 import ReservationView from '../views/ReservationView.vue'
 import TutorialView from '../views/TutorialView.vue'
 import ProfileView from '../views/ProfileView.vue'
-import CompleteProfileView from '../views/CompleteProfileView.vue'
 
 const routes = [
   {
@@ -56,15 +55,7 @@ const routes = [
     meta: {
       requireLogin: true
     }
-  },
-  {
-    path: '/completar-perfil',
-    name: 'CompletarPerfil',
-    component: CompleteProfileView,
-    meta: {
-      requireLogin: true
-    }
-  },
+  }
 ]
 
 const router = createRouter({

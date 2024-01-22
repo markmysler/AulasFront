@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div class="columnItemsCenter w-100 py-5 ga-5">
     <h2>Completa tu perfil</h2>
     <v-form @submit.prevent="submitForm" class="columnItemsCenter w-100">
@@ -49,4 +49,4 @@
       },
     },
   };
-</script>
+</script> -->
