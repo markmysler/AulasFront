@@ -5,7 +5,7 @@
   </v-app-bar>
   <v-navigation-drawer v-model="showMenu" app>
     <v-list tag="ul" v-if="!$store.state.isAuthenticated">
-      <li v-for="item in menuRegular" :key="item.title">
+      <li v-for="item in menuRegular" :key="item.title" @click="closeHeader">
         <v-list-item :to="item.path">
           <v-list-item-action>
             <v-icon color="blue" :icon="item.icon"></v-icon>
@@ -16,7 +16,7 @@
     </v-list>
     <v-list tag="ul" v-else class="menuRequiredLogin">
       <div>
-        <li v-for="item in menuRequiredLogin" :key="item.title">
+        <li v-for="item in menuRequiredLogin" :key="item.title" @click="closeHeader">
           <v-list-item :to="item.path">
             <v-list-item-action>
               <v-icon color="blue" :icon="item.icon"></v-icon>
@@ -101,6 +101,9 @@ export default {
       this.$store.commit('removeToken');
       this.$router.push('/');
     },
+    closeHeader(){
+      this.showMenu = false
+    }
   }
 };
 </script>

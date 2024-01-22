@@ -38,6 +38,8 @@ export default createStore({
                   state.user.id = data.id;
                   state.user.username = data.username;
                   state.user.email = data.email;
+              }).catch(error=>{
+                console.log(error);
               })
     },
     removeToken(state){

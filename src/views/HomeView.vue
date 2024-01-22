@@ -3,7 +3,7 @@
     <h2>Aulas Disponibles</h2>
     <v-btn @click="$router.push('/reservar')" elevation="3" class="bg-blue text-white mt-3">Reservar aula</v-btn>
     <div class="aulasWrapper">
-      <div class="aula columnItemsCenter text-center" v-for="aula in aulas" :key="aula.id">
+      <div class="aula columnItemsCenter text-center" v-for="aula in aulas" :key="aula.id" @click="$router.push(`/aula/${aula.id}`)">
         <p>{{ aula.name }}</p>
         <p>Capacidad: {{ aula.max_capacity }}</p>
         <p>Negatoscopio: {{ aula.has_negatoscope }}</p>
